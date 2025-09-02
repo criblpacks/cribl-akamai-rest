@@ -1,0 +1,1 @@
+{"name":"cribl-akamai-rest","version":"0.1.2","minLogStreamVersion":"4.12.0","author":"Cribl Packs Team","description":"Collector pack to process data from the Alerts, Devices, and Vulnerabilities REST endpoints.","displayName":"Akamai Rest Collector","tags":{"streamtags":[],"dataType":["logs"],"useCase":["reduction","routing"]},"exports":[]}
