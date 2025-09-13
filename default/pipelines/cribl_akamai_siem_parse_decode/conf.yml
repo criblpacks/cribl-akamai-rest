@@ -4,10 +4,20 @@ groups:
   oQucZ4:
     name: Parse Attack Data
     description: Handles decoding and reformatting attack data
-    index: 2
+    index: 4
     disabled: false
 asyncFuncTimeout: 1000
 functions:
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: Pre-processing pipeline to decode the attackData JSON array
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: "Author: Cribl Packs Team"
   - id: drop
     filter: offset || __drop === true
     disabled: null

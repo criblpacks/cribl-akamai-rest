@@ -10,6 +10,11 @@ functions:
     conf:
       comment: Unroll each rule array member since they each represent a separate
         Finding with different values for many Detection Finding fields
+  - id: comment
+    filter: "true"
+    disabled: null
+    conf:
+      comment: "Author: Cribl Packs Team"
   - id: eval
     filter: "true"
     disabled: false
@@ -219,5 +224,5 @@ streamtags:
 groups:
   c5yBAR:
     name: Set OCSF Detection Finding fields
-    index: 2
+    index: 3
     disabled: false

@@ -89,6 +89,8 @@ in_akamai_siem_integration:
     output: devnull
   savedState: {}
   notifications: []
+  description: Collect Akamai SIEM events using offsets - guarantees not
+    lost/duplicate data. See README for details.
 in_akamai_siem_integration_offset_advanced:
   type: collection
   ttl: 4h
@@ -140,7 +142,7 @@ in_akamai_siem_integration_offset_advanced:
       discovery:
         discoverType: list
         itemList:
-          - "83339"
+          - "12345"
       collectMethod: get
       pagination:
         type: none
