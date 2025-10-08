@@ -4,25 +4,13 @@ comments: []
 routes:
   - id: 7waQxH
     name: cribl_akamai_siem_events_route
-    final: false
+    final: true
     disabled: false
     pipeline: cribl_akamai_siem_security_events
     description: Process Akamai SIEM Security Events
     enableOutputExpression: false
     outputExpression: null
-    filter: source.includes('/siem/v1/configs')
-    clones:
-      - {}
-    output: default
-  - id: 5ZCWFJ
-    name: cribl_akamai_siem_events_monitor_lag
-    final: true
-    disabled: true
-    pipeline: cribl_akamai_siem_monitor_rest_collection_lag
-    description: Enable and configure a Destination. See README for details.
-    enableOutputExpression: false
-    outputExpression: null
-    filter: source.includes('/siem/v1/configs')
+    filter: __collectible.collectorId.startswith('cribl-akamai-rest')
     clones: []
     output: default
   - id: default
