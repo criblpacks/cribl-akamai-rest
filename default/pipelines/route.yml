@@ -10,7 +10,7 @@ routes:
     description: Process Akamai SIEM Security Events
     enableOutputExpression: false
     outputExpression: null
-    filter: __collectible.collectorId.startswith('cribl-akamai-rest')
+    filter: __packsource == 'cribl-akamai-rest-io.akamai-api'
     clones: []
     output: default
   - id: default

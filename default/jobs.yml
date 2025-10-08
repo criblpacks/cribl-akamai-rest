@@ -87,6 +87,9 @@ in_akamai_siem_integration:
       - Akamai SIEM Integration Ruleset
     pipeline: cribl_akamai_siem_parse_decode
     output: devnull
+    metadata:
+      - name: __packsource
+        value: "'cribl-akamai-rest-io.akamai-api'"
   savedState: {}
   notifications: []
   description: Collect Akamai SIEM events using offsets - guarantees not
@@ -199,7 +202,9 @@ in_akamai_siem_integration_offset_advanced:
       - Akamai SIEM Integration Ruleset
     pipeline: cribl_akamai_siem_parse_decode
     output: devnull
-    metadata: []
+    metadata:
+      - name: __packsource
+        value: "'cribl-akamai-rest-io.akamai-api'"
   savedState: {}
   notifications: []
   description: "Lag Correction Collector - detects and compensates for lag due to
@@ -319,6 +324,8 @@ in_akamai_siem_integration_multithreaded:
     metadata:
       - name: id
         value: "`${__collectible.id}`"
+      - name: __packsource
+        value: "'cribl-akamai-rest-io.akamai-api'"
   savedState: {}
   notifications: []
   description: "High-Volume Collector - runs 4 threads every minute. See Pack
