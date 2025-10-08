@@ -1,14 +1,23 @@
-# Cribl Akamai SIEM Integration REST Collector Pack
+# Akamai SIEM Integration REST Collector IO
 ----
 ## About this Pack
 
-This Pack is designed to collect, process, and output Akamai Security Event data via the [Akamai SIEM Integration REST API](https://techdocs.akamai.com/siem-integration/reference/get-configid). 
+This pack is built as a complete SOURCE + DESTINATION solution (identified by the IO suffix). Data collection and delivery happen entirely within the pack's context, eliminating the need to connect it to globally defined Sources and Destinations. 
+
+This Collector-based  Pack is designed to collect, process, and output Akamai Security Event data via the [Akamai SIEM Integration REST API](https://techdocs.akamai.com/siem-integration/reference/get-configid). 
 
 The Pack includes OCSF and Splunk output processing:
 * Security Event data is mapped to the OCSF [Detection Finding [2004] Class](https://schema.ocsf.io/1.4.0/classes/detection_finding).
 * Security Event data is mapped to the Splunk `sourcetype=akamaisiem` for compatibility with the [Akamai SIEM Integration App](https://splunkbase.splunk.com/app/4310)
 
 ## Deployment
+
+* This pack is configured by default to use the Worker Group's *Default Destination*.
+* To use the *Default Destination*: No changes are required. The pack will route the data to the destination currently set as the Default on the Worker Group.
+* To use a different Destination: You must update the pack's routes to specify your desired Destination.
+* For immediate functionality without requiring Pack route filter expression modifications, every bundled Source within this pack adds a hidden field: `__packsource == 'cribl-akamai-rest-io.akamai-api'`. This field allows for seamless routing based on the Pack source.
+
+
 After installing the Pack, you must perform the following:
 
 ### Add Akamai Credentials to Cribl Stream
@@ -27,6 +36,13 @@ After installing the Pack, you must perform the following:
    * In **Collect**, replace the placeholder `YOUR_AKAMAI_URL` with your actual Akamai URL.
 * Perform a **Run > Preview** of the  `in_akamai_siem_integration` Collector to verify that it works correctly.
 * Schedule the Collector and ensure State Tracking is enabled (the correct configuration is already included).
+
+### Configure your Destination/Update Pack Routes
+To ensure proper data routing, you must make a choice: retain the current setting to use the Default Destination defined by your Worker Group, or define a new Destination directly inside this pack and adjust the pack's route accordingly.
+
+### Commit and Deploy
+Once everything is configured, perform a Commit & Deploy to enable data collection.
+
 
 ## Pack Configurable Items 
 The following are the in-Pack configurable items - review/update them as needed. 
@@ -74,19 +90,21 @@ The Pack includes functionality to monitor the data ingestion lag via the `cribl
 * Monitor the lag (in Cribl Search or similar) with this search : `dataset="mydataset" input="collection:xxx" |timestats span=5s count(), max(lag), min(lag), percentile(lag,90)`
 * Monitor duplicates with this search `dataset="xxx"  | summarize count() by sha | where count_ > 1`
 
+## Upgrades
+
+Upgrading certain Cribl Packs using the same Pack ID can have unintended consequences. See [Upgrading an Existing Pack](https://docs.cribl.io/stream/packs#upgrading) for details.
+
 ## Release Notes
 
-### Version 0.1.0 - 2025-08-15
-
-External Beta
-* Contains the pipelines for processing Akamai SIEM Integration Security Events
-* Supports either OCSF or Splunk output formats
+### Version 1.0.0
+Initial release
 
 ## Contributing to the Pack
-To contribute to the Pack, please connect with us on [Cribl Community Slack](https://cribl-community.slack.com/). You can suggest new features or offer to collaborate.
 
-## Acknowledgments
-Thanks to Sidd Shah - sshah@cribl.io and Simon Duchene - sduchene@cribl.io for creating the Collector configurations and initial pipelines!
+To contribute to the Pack, please connect with us on [Cribl Community Slack](https://cribl-community.slack.com/). You can suggest new features or offer to collaborate.
 
 ## License
 This Pack uses the following license: [Apache 2.0](https://github.com/criblio/appscope/blob/master/LICENSE).
+
+## Acknowledgments
+Thanks to Sidd Shah - sshah@cribl.io and Simon Duchene - sduchene@cribl.io for creating the Collector configurations and initial pipelines!
